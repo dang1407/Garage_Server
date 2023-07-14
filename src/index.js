@@ -1,25 +1,25 @@
 const express = require('express');
 const cors = require('cors');
-const port = 5000;
+const port = process.env.PORT || 5000;
 const app = express();
-const mongoose = require('mongoose');
+const connectDB = require("./config/db");
 const route = require('./app/routes');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const doenv = require('dotenv').config()
+const cookieParser = require('cookie-parser');
+
 // Connect database
-mongoose.connect("mongodb://127.0.0.1:27017/admin", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.error('Could not connect to MongoDB', err));
+connectDB();
 
 app.use(express.json());
 
-app.use(bodyParser.urlencoded({ extended: false })); // Xử lý dữ liệu URL-encoded
-
+// Xử lý dữ liệu URL-encoded
+app.use(express.urlencoded({extended: true}))
 // Connect BE and FE
 app.use(cors());
 
+// Đọc cookie
+app.use(cookieParser());
 
 // Config rout
 route(app);
