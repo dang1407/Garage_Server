@@ -29,9 +29,20 @@ var userSchema = new mongoose.Schema({
         required:true,
         unique: true
     },
+    address: {
+      type: String, 
+      default: "Chưa có thông tin"
+    },
     work: {
       type: String,
       required: true
+    },
+    avatar: {
+      type: String, 
+      default: "https://res.cloudinary.com/dmbzrlrot/image/upload/v1689500262/Garage/Thi%E1%BA%BFt_k%E1%BA%BF_ch%C6%B0a_c%C3%B3_t%C3%AAn_pa9ekw.png"
+    },
+    avatarKey: {
+      type: String,
     },
     workPart: {
       type: String,

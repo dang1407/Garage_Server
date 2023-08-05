@@ -12,7 +12,7 @@ const verifyAccessToken = asyncHandler(async (req, res, next) => {
       */
       if(req?.headers?.authorization?.startsWith('Bearer')){
             const token = req.headers.authorization.split(' ')[1];
-            console.log("Token: " + token);
+            // console.log("Token: " + token);
             jwt.verify(token, process.env.JWT_SECRET, (err, decode) =>{
                   if(err) return res.status(401).json({
                         success: false,
@@ -20,7 +20,7 @@ const verifyAccessToken = asyncHandler(async (req, res, next) => {
                   })
                   /* decode là thông tin giải mã, trong trường hợp này là id và role
                   (Tham số đầu vào của hàm generateToken) */
-                  console.log(decode);
+                  // console.log(decode);
                   // thêm id và role của user vào request
                   req.user = decode;
                   next();
